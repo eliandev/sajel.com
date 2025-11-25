@@ -1,14 +1,126 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Quiz Simple</title>
+    <style>
+        /* CSS: Estilos visuales */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .quiz-card {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 300px;
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 1.5rem;
+        }
+
+        .options-container {
+            display: flex;
+            flex-direction: row;
+            gap: 10px;
+        }
+
+        button {
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            background-color: white;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #f0f0f0;
+            border-color: #ccc;
+        }
+
+        /* Clase para retroalimentación visual al hacer clic */
+        .btn-correct {
+            background-color: #d4edda !important;
+            border-color: #28a745 !important;
+            color: #155724;
+        }
+
+        .btn-wrong {
+            background-color: #f8d7da !important;
+            border-color: #dc3545 !important;
+            color: #721c24;
+        }
+
+        #mensaje-resultado {
+            margin-top: 20px;
+            font-weight: bold;
+            min-height: 24px;
+            /* Reserva espacio para que no salte el contenido */
+        }
+
+        .texto-exito {
+            color: #28a745;
+        }
+
+        .texto-error {
+            color: #dc3545;
+        }
+    </style>
 </head>
 
 <body>
-    <h1>Sajel.com</h1>
+
+    <div class="quiz-card">
+        <h2>Selecciona la opción correcta</h2>
+
+        <div class="options-container">
+            <button id="btn-opcion-1" onclick="verificarRespuesta(1)">Opción 1</button>
+            <button id="btn-opcion-2" onclick="verificarRespuesta(2)">Opción 2</button>
+        </div>
+
+        <p id="mensaje-resultado"></p>
+    </div>
+
+    <script>
+        // JS: Lógica del Quiz
+        function verificarRespuesta(opcionSeleccionada) {
+            const mensaje = document.getElementById('mensaje-resultado');
+            const btn1 = document.getElementById('btn-opcion-1');
+            const btn2 = document.getElementById('btn-opcion-2');
+
+            // Reiniciamos estilos primero
+            mensaje.className = '';
+            btn1.className = '';
+            btn2.className = '';
+
+            if (opcionSeleccionada === 2) {
+                // Caso: Respuesta Correcta
+                mensaje.textContent = "¡Respuesta correcta!";
+                mensaje.className = "texto-exito";
+                btn2.classList.add('btn-correct');
+            } else {
+                // Caso: Respuesta Incorrecta (Opcional, pero buena práctica)
+                mensaje.textContent = "Incorrecto, intenta de nuevo.";
+                mensaje.className = "texto-error";
+                btn1.classList.add('btn-wrong');
+            }
+        }
+    </script>
 </body>
 
 </html>
